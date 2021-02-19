@@ -1,26 +1,29 @@
 {
-  "name": "express-api-starter",
+  "name": "jy_book_list",
   "version": "1.2.0",
   "description": " A basic starter for an express.js API",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node src/index.js",
+    "start:dev": "concurrently \"nodemon  --ignore 'client/*'\" \" npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build",
     "lint": "eslint --fix src",
     "test": "mocha --exit"
   },
   "keywords": [],
-  "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/w3cj/express-api-starter.git"
-  },
+  "author": "Justin Young",
   "license": "MIT",
   "dependencies": {
+    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
+    "if-env": "^1.0.4",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
