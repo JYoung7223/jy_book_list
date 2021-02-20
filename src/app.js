@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const mongoose = require("mongoose");
 
 require('dotenv').config();
 
@@ -22,13 +23,23 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
-  });
-});
+// Connect to DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/googlebooks", 
+  {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true
+  }
+);
+// app.get('/', (req, res) => {
+//   res.json({
+//     message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
+//   });
+// });
 
-app.use('/api/v1', api);
+app.use('/api', api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
