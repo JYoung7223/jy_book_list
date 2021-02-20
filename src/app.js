@@ -13,7 +13,14 @@ const app = express();
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use([
+  express.urlencoded({ extended: true }), 
+  express.json()
+]);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.get('/', (req, res) => {
   res.json({

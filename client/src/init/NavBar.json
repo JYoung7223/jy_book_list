@@ -1,0 +1,20 @@
+[
+    {
+        "text": "My Book List",
+        "link": "/",
+        "icon": "fas fa-book",
+        "order": 0
+    },
+    {
+        "text": "Saved",
+        "link": "/saved",
+        "icon": "far fa-save",
+        "order": 1
+    },
+    {
+        "text": "Search",
+        "link": "/",
+        "icon": "fas fa-search",
+        "order": 2
+    }
+]
