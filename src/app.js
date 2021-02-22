@@ -33,15 +33,16 @@ mongoose.connect(
       useCreateIndex: true
   }
 );
-// app.get('/', (req, res) => {
-//   res.json({
-//     message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
-//   });
-// });
 
 app.use('/api', api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
+
+app.get('/', (req, res) => {
+  res.status(400).json({
+    message: 'Bad Request: 🦄🌈✨👋🌎🌍🌏✨🌈🦄'
+  });
+});
 
 module.exports = app;

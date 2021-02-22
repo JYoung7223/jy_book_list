@@ -49,8 +49,8 @@ router.delete("/:id", async(req, res) =>{
 
 router.get("*", (req, res) => {
   console.log("Default get Request");
-    res.json({
-      message: 'API - 👋🌎🌍🌏'
+    res.status(400).json({
+      message: 'Bad API Request - 👋🌎🌍🌏'
     });
   });
   
