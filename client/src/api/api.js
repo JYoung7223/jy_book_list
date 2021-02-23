@@ -4,6 +4,7 @@ const googleBooksAPI = "https://www.googleapis.com/books/v1/volumes?q=";
 
 const API = {
   async findBooks(search) {
+    console.log(`Searching For Book:${search}`);
     return await axios.get(`${googleBooksAPI}${search}`);
     // console.log(`Finding Book:${search}`);
     // let res;
@@ -18,29 +19,31 @@ const API = {
   },
   async getMyBooks() {
     console.log(`Getting My Books:`);
-    const res = await fetch("/api/books/", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
+    return await axios.get(`/api/books/`);
+    // const res = await fetch("/api/books/", {
+    //   method: "GET",
+    //   headers: { "Content-Type": "application/json" }
+    // });
 
-    const json = await res.json();
+    // const json = await res.json();
 
-    return json;
+    // return json;
   },
   async addBook(data){
     console.log(`AddingBook:${data}`);
-    return await axios.post(`http://localhost:5000/api/books/`, data);
+    return await axios.post(`/api/books/`, data);
   },
-  async deleteBook(data) {
-    console.log(`Deleting Book From My List:${data}`);
-    const res = await fetch(`/api/books/${data.id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    });
+  async deleteBook(id) {
+    console.log(`Deleting Book From My List:${id}`);
+    return await axios.delete(`/api/books/${id}`);
+    // const res = await fetch(`/api/books/${id}`, {
+    //   method: "DELETE",
+    //   headers: { "Content-Type": "application/json" }
+    // });
 
-    const json = await res.json();
+    // const json = await res.json();
 
-    return json;
+    // return json;
   }
 };
 

@@ -1,84 +1,65 @@
-import React, { useRef, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { API } from "../api/API";
 
 function Saved(){ 
-    const bookRef = useRef();
     const initBookState = [];
     function setBookState(currentBookState, change){
         switch(change.request){
-            case "update-search":
+            case "update-list":
                 return {
-                    ...currentBookState, 
-                    searchList: change.value
-                };
-            case "add-book":
-                return {
-                    ...currentBookState,
-                    myList: [...bookState.myList, change.value]
+                    myList: change.value.data
                 };
         }
         return {...currentBookState};
     }
     const [bookState, updateBookState] = useReducer(setBookState, initBookState);
 
-    const handleSubmit = async (event)=>{
+    useEffect(async()=>{
+        // Get list of books from DB
+        console.log("UseEffect");
+        const bookList = await API.getMyBooks();
+        console.log(`BookList:${JSON.stringify(bookList)}`);
+        updateBookState(
+            {
+                request:"update-list", 
+                value:bookList                
+            }
+        );
+    },[]);
+
+    const handleRemove = async (event)=>{
         event.preventDefault();
-        // perfomr book search
-        if(bookRef.current.value){
-            let bookList = await API.findBooks(bookRef.current.value);
-            // store results in state
-            updateBookState(
-                {
-                    request: "update-search", 
-                    value: bookList.data.items
-                }
-            );
-            // console.log(`Updated Context:${bookState}`);
-        }
-    };
-    const handleAdd = async (event)=>{
-        event.preventDefault();
-        const bookId = event.target.value;
-        // find and add book
-        if(bookRef.current.value){
-            const bookToAdd = bookState.searchList.find(book => book.id === bookId);
-            // store results in state
-            updateBookState(
-                {
-                    request: "add-book", 
-                    value: bookToAdd
-                }
-            );
-            // console.log(`Updated Context:${bookState}`);
-        }
+        console.log(event.target);
+        await API.deleteBook(event.target.value);
+        const bookList = await API.getMyBooks();
+        updateBookState(
+            {
+                value:bookList, 
+                request:"update-list"
+            }
+        );
+        console.log(`Removed Book:${event.target.id}`);
     };
 
     return (
         <div className="container border">
             <div className="col-12">
-                <h3>Book Search</h3>
+                <h3>My Saved Books</h3>
             </div>
-            <form className="form=group mt-2" onSubmit={handleSubmit}>
-                <div className="col-12">
-                    <input className="form-control" type="text" ref={bookRef} placeholder="Title and/or Author"/>
-                </div>
-                <div className="col-12">
-                    <button className="btn btn-primary" type="submit">Search <i className="fas fa-search"></i></button>
-                </div>
-            </form>
-            <div className="books row">
-                {bookState.searchList && bookState.searchList.map((book, index)=>{
+            <div className="books row my-3">
+                {bookState.myList && bookState.myList.map((book, index)=>{
                     return(
-                        <div className="book col mb-4" key={index}>
+                        <div className="book col-4 mb-4" key={index}>
                             <section className="card">
-                                {book.volumeInfo.imageLinks ? (<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top" alt={book.volumeInfo.title}/>) : (<p></p>)}
+                                {book.image ? (<img src={book.image} className="card-img-top" alt={book.title}/>) : (<p></p>)}
                                 <summary className="card-body">
-                                    <h5 className="book-title card-title">{book.volumeInfo.title}</h5>
-                                    <p className="book-description card-text"> {book.volumeInfo.description}</p>
-                                    <button className="btn btn-primary" value={book.id} type="button" onClick={handleAdd}>Add To My List <i className="fas fa-plus"></i></button>
-                                    {book.volumeInfo.infoLink &&
-                                        <a href={book.volumeInfo.infoLink} className="btn btn-secondary">Get More Info <i className="fas fa-info"></i></a>
-                                    }
+                                    <h5 className="book-title card-title">{book.title}</h5>
+                                    <p className="book-author card-text"> {book.authors}</p>
+                                    <p className="book-description card-text"> {book.description}</p>
+                                    <button className="btn btn-primary mx-3" value={book._id} type="button" onClick={handleRemove}>Remove From My List <i className="fas fa-minus"></i></button>
+                                    {book.link ? (
+                                        <a href={book.link} className="btn btn-secondary mx-3">Get More Info <i className="fas fa-info"></i></a>
+                                    ) : ''}
                                 </summary>
                             </section>
                         </div>

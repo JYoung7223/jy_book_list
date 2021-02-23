@@ -37,6 +37,7 @@ function Search(){
             // console.log(`Updated Context:${bookState}`);
         }
     };
+
     const handleAdd = async (event)=>{
         event.preventDefault();
         const bookId = event.target.value;
@@ -60,6 +61,7 @@ function Search(){
             );
             console.log(`Book Saved:${bookSaved}`);
         }
+        window.location = "/saved";
     };
 
     return (
@@ -75,18 +77,18 @@ function Search(){
                     <button className="btn btn-primary" type="submit">Search <i className="fas fa-search"></i></button>
                 </div>
             </form>
-            <div className="books row">
+            <div className="books row my-3">
                 {bookState.searchList && bookState.searchList.map((book, index)=>{
                     return(
-                        <div className="book col mb-4" key={index}>
+                        <div className="book col-4 mb-4" key={index}>
                             <section className="card">
                                 {book.volumeInfo.imageLinks ? (<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top" alt={book.volumeInfo.title}/>) : (<p></p>)}
                                 <summary className="card-body">
                                     <h5 className="book-title card-title">{book.volumeInfo.title}</h5>
                                     <p className="book-description card-text"> {book.volumeInfo.description}</p>
-                                    <button className="btn btn-primary" value={book.id} type="button" onClick={handleAdd}>Add To My List <i className="fas fa-plus"></i></button>
+                                    <button className="btn btn-primary mx-3" value={book.id} type="button" onClick={handleAdd}>Add To My List <i className="fas fa-plus"></i></button>
                                     {book.volumeInfo.infoLink &&
-                                        <a href={book.volumeInfo.infoLink} className="btn btn-secondary">Get More Info <i className="fas fa-info"></i></a>
+                                        <a href={book.volumeInfo.infoLink} className="btn btn-secondary mx-3">Get More Info <i className="fas fa-info"></i></a>
                                     }
                                 </summary>
                             </section>
