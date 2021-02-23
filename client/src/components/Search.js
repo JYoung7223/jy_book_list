@@ -85,6 +85,7 @@ function Search(){
                                 {book.volumeInfo.imageLinks ? (<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top" alt={book.volumeInfo.title}/>) : (<p></p>)}
                                 <summary className="card-body">
                                     <h5 className="book-title card-title">{book.volumeInfo.title}</h5>
+                                    <p className="book-description card-text">BY: {book.volumeInfo.authors}</p>
                                     <p className="book-description card-text"> {book.volumeInfo.description}</p>
                                     <button className="btn btn-primary mx-3" value={book.id} type="button" onClick={handleAdd}>Add To My List <i className="fas fa-plus"></i></button>
                                     {book.volumeInfo.infoLink &&

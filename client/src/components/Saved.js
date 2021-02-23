@@ -54,7 +54,7 @@ function Saved(){
                                 {book.image ? (<img src={book.image} className="card-img-top" alt={book.title}/>) : (<p></p>)}
                                 <summary className="card-body">
                                     <h5 className="book-title card-title">{book.title}</h5>
-                                    <p className="book-author card-text"> {book.authors}</p>
+                                    <p className="book-author card-text">BY: {book.authors}</p>
                                     <p className="book-description card-text"> {book.description}</p>
                                     <button className="btn btn-primary mx-3" value={book._id} type="button" onClick={handleRemove}>Remove From My List <i className="fas fa-minus"></i></button>
                                     {book.link ? (

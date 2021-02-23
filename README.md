@@ -1,45 +1,50 @@
-# Express API Starter
 
-Includes API Server utilities:
+# JY Book List
+[![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+## Description
+This Project uses React to provide a simple front end book search and save list.  
+The backend uses Express with Mongoose and MongoDB to save books.
+## Table of Contents
+* [`Project`](#)
+* [`Description`](#Description)
+* [`Table of Contents`](#Table-of-Contents)
+* [`1nstallation Steps`](#Installation-Steps)
+* [`Usage Information`](#Usage-Information)
+* [`Testing`](#Testing)
+* [`License`](#License)
+* [`Contributing`](#Contributing)
+* [`Questions`](#Questions)
+* [`Sample`](#Sample)
+## Installation Steps
+To install this project, do the following:
+> 1. To Install on "localhost", clone repository to local workspace.
+> 2. In a terminal, in project base directory, run "npm install" to install dependencies.
+> 3. Ensure you have Mongo DB service running (in seperate terminal run mongod, if needed)
+> 4. Run "npm run start" to start the application.
+> NOTE: You may need to change the URL under package.json to use a proxy to the backend URL & Port.
 
-* [morgan](https://www.npmjs.com/package/morgan)
-  * HTTP request logger middleware for node.js
-* [helmet](https://www.npmjs.com/package/helmet)
-  * Helmet helps you secure your Express apps by setting various HTTP headers. It's not a silver bullet, but it can help!
-* [dotenv](https://www.npmjs.com/package/dotenv)
-  * Dotenv is a zero-dependency module that loads environment variables from a `.env` file into `process.env`
+## Usage Information
+To use this project, do the following:
+> 1. Ensure Installation Steps have been complete.
+> 2. For localhost, open browser and browse to URL http://localhost:3000
+> 3. You may search books (uses the Google Books API) and save them to your list (Uses Express and Mongoose).
+> 4. You may also view your saved books and remove Books or view more info on the book.
 
-Development utilities:
+## Testing
+To test this project, do the following:
+> 1. To test on localhost, Ensure Installation steps are complete
+> 2. Verify Working on localhost, by performing Usage Steps
 
-* [nodemon](https://www.npmjs.com/package/nodemon)
-  * nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
-* [eslint](https://www.npmjs.com/package/eslint)
-  * ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
-* [mocha](https://www.npmjs.com/package/mocha)
-  * ☕️ Simple, flexible, fun JavaScript test framework for Node.js & The Browser ☕️
-* [supertest](https://www.npmjs.com/package/supertest)
-  * HTTP assertions made easy via superagent.
+## License
+This project is provided under the None license. For more information on license details click here [![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+## Contributing
+If you wish to contribute, do the following:
+> Email me directly or submit pull request to contribute.
+## Questions
+If you have any question about this repo, you may open an issue or contact me directly at jyoung7223@yahoo.com
+You can find more of my work at [My Github Repo](https://github.com/JYoung7223 "My GitHub Repo")
+## Sample
+Deployed project can be found at: https://jy-book-list.heroku.com
 
-## Setup
-
-```
-npm install
-```
-
-## Lint
-
-```
-npm run lint
-```
-
-## Test
-
-```
-npm run test
-```
-
-## Development
-
-```
-npm run dev
-```
+Below is a sample screenshot:
+![Project Sample](./assets/my-books.png "Project Sample")
