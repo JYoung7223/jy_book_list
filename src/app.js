@@ -28,13 +28,13 @@ mongoose.connect(
 
 app.use('/api', api);
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+// app.use(middlewares.notFound);
+// app.use(middlewares.errorHandler);
 
-app.get('/', (req, res) => {
-  res.status(400).json({
-    message: 'Bad Request: 🦄🌈✨👋🌎🌍🌏✨🌈🦄'
-  });
-});
+// app.get('/', (req, res) => {
+//   res.status(400).json({
+//     message: 'Bad Request: 🦄🌈✨👋🌎🌍🌏✨🌈🦄'
+//   });
+// });
 
 module.exports = app;
