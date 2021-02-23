@@ -3,6 +3,9 @@ const Schema = Mongoose.Schema;
 
 const BookSchema = new Schema(
     {
+        id: {
+            type: String
+        },
         title: {
             type: String,
             trim: true,

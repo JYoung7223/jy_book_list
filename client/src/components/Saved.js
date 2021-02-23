@@ -1,7 +1,7 @@
 import React, { useRef, useReducer } from "react";
 import { API } from "../api/API";
 
-function Search(){ 
+function Saved(){ 
     const bookRef = useRef();
     const initBookState = [];
     function setBookState(currentBookState, change){
@@ -12,10 +12,9 @@ function Search(){
                     searchList: change.value
                 };
             case "add-book":
-                const bookList = currentBookState.myList || [];                
                 return {
-                        ...currentBookState,
-                    myList: [...bookList, change.value]
+                    ...currentBookState,
+                    myList: [...bookState.myList, change.value]
                 };
         }
         return {...currentBookState};
@@ -43,14 +42,6 @@ function Search(){
         // find and add book
         if(bookRef.current.value){
             const bookToAdd = bookState.searchList.find(book => book.id === bookId);
-            let bookSaved = await API.addBook({
-                id: bookToAdd.id,
-                title: bookToAdd.volumeInfo.title,
-                authors: bookToAdd.volumeInfo.authors,
-                description: bookToAdd.volumeInfo.description,
-                image: bookToAdd.volumeInfo.imageLinks.thumbnail || "",
-                link: bookToAdd.volumeInfo.infoLink
-            });
             // store results in state
             updateBookState(
                 {
@@ -58,7 +49,7 @@ function Search(){
                     value: bookToAdd
                 }
             );
-            console.log(`Book Saved:${bookSaved}`);
+            // console.log(`Updated Context:${bookState}`);
         }
     };
 
@@ -99,5 +90,5 @@ function Search(){
 }
 
 export {
-    Search
+    Saved
 };
